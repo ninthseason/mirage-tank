@@ -79,12 +79,22 @@ Mirage-Tank 是一个由 python 编写的命令行工具。使用它可以轻松
 3. 输入：
 
    ```shell
-   D:\mirage-tank>python mirage.py -t "example/top.png" -b "example/bottom.png" -o "example/out.png"
+   python mirage.py -t "example/top.png" -b "example/bottom.png" -o "example/out.png"
    ```
 
 4. 稍等片刻，等待完成提示。
 
 5. 进入`example`文件夹，用浏览器打开`test.html`网页，即可查看成品效果。
+
+## 更多
+
+通过`-s`参数可以使程序不打印控制台信息，静默处理。
+
+例如：
+
+```shell
+python mirage.py -t "example/top.png" -b "example/bottom.png" -o "example/out.png" -s
+```
 
 ## Q&A
 
@@ -100,6 +110,10 @@ Q：为什么我把图片发出去后就没有效果了？
 
 A：请勾选原图发送，接收方也需要下载原图。
 
-Q：这篇 README 凑到多少字了？
+Q：为什么我的程序报错了？
 
-A：1863 个字符。
+A：请检查文件路径是否正确输入。
+
+Q：为什么处理速度这么慢？
+
+A：可能这就是python吧。

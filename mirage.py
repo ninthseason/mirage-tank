@@ -1,11 +1,13 @@
 import numpy as np
 from PIL import Image
 from argparse import ArgumentParser
+import time
 
 parser = ArgumentParser()
 parser.add_argument("-t", "--top", required=True, help="顶层图片路径", metavar="\"./top.png\"")
 parser.add_argument("-b", "--bottom", required=True, help="底层图片路径", metavar="\"./bottom.png\"")
 parser.add_argument("-o", "--output", required=True, help="输出路径", metavar="\"./out.png\"")
+parser.add_argument("-s", "--silent", help="取消控制台输出", action="store_true")
 
 
 def hollow(image: np.ndarray, mode: int) -> np.ndarray:
@@ -47,11 +49,28 @@ def generate_mirage(top_hollowed: np.ndarray, bottom_hollowed: np.ndarray) -> np
 
 if __name__ == '__main__':
     args = vars(parser.parse_args())
-    top = np.array(Image.open(args.get("top"), mode="r").convert("LA"))
-    bottom = np.array(Image.open(args.get("bottom"), mode="r").convert("LA"))
-    top = hollow(top, mode=1)
-    bottom = hollow(bottom, mode=0)
-    out = generate_mirage(top, bottom)
-    Image.fromarray(out).save(args.get("output"))
-    print("生成成功！")
+    if args.get("silent", False):
+        top = np.array(Image.open(args.get("top"), mode="r").convert("LA"))
+        bottom = np.array(Image.open(args.get("bottom"), mode="r").convert("LA"))
+        top = hollow(top, mode=1)
+        bottom = hollow(bottom, mode=0)
+        out = generate_mirage(top, bottom)
+        Image.fromarray(out).save(args.get("output"))
+    else:
+        now = time.time()
+        print("开始处理...")
+        top = np.array(Image.open(args.get("top"), mode="r").convert("LA"))
+        bottom = np.array(Image.open(args.get("bottom"), mode="r").convert("LA"))
+        print("读取图片耗时: %.2fs" % (time.time() - now))
+        now = time.time()
+        top = hollow(top, mode=1)
+        bottom = hollow(bottom, mode=0)
+        print("处理图片耗时: %.2fs" % (time.time() - now))
+        now = time.time()
+        out = generate_mirage(top, bottom)
+        print("合成图片耗时: %.2fs" % (time.time() - now))
+        now = time.time()
+        Image.fromarray(out).save(args.get("output"))
+        print("保存图片耗时: %.2fs" % (time.time() - now))
+        print("生成成功！")
 
