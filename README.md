@@ -95,25 +95,3 @@ Mirage-Tank 是一个由 python 编写的命令行工具。使用它可以轻松
 ```shell
 python mirage.py -t "example/top.png" -b "example/bottom.png" -o "example/out.png" -s
 ```
-
-## Q&A
-
-Q：幻影坦克的原理是什么？
-
-A：请自行百度。
-
-Q：为什么教程这么啰嗦？
-
-A：这样能显得 README 很长😇
-
-Q：为什么我把图片发出去后就没有效果了？
-
-A：请勾选原图发送，接收方也需要下载原图。
-
-Q：为什么我的程序报错了？
-
-A：请检查文件路径是否正确输入。
-
-Q：为什么处理速度这么慢？
-
-A：可能这就是python吧。
